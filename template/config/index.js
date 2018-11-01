@@ -1,10 +1,21 @@
 'use strict'
-// Template version: {{ template_version }}
+// Template version: 1.0.0
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
+  mand: {
+    pxtorem: {
+      // If you modify rootValue, you also need to modify rem in static/responsive.js
+      rootValue: 100, // 1rem=100px
+      propWhiteList: []
+    }
+  },
   dev: {
 
     // Paths
@@ -20,14 +31,6 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    {{#lint}}// Use Eslint Loader?
-    // If true, your code will be linted during bundling and
-    // linting errors and warnings will be shown in the console.
-    useEslint: true,
-    // If true, eslint errors and warnings will also be shown in the error overlay
-    // in the browser.
-    showEslintErrorsInOverlay: false,
-    {{/lint}}
 
     /**
      * Source Maps
@@ -41,7 +44,8 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true
+    cssSourceMap: true,
+    mandThemPath: path.resolve(__dirname, '../src/styles/theme.custom.styl')
   },
 
   build: {
